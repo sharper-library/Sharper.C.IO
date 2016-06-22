@@ -1,5 +1,5 @@
 {
-    "version": "1.0-*",
+    "version": "1.0",
     "description": "A type for effects",
     "authors": [
         "Jeremy Hughes <jeremy@tflite.com>"
