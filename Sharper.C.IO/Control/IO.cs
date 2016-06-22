@@ -71,21 +71,25 @@ namespace Sharper.C.Control
         public Task<A> UnsafeTask
         =>  task();
 
-        public IO<E, A> Catch<Ex>(Func<Ex, IO<E, A>> handler)
+        public IO<E, Or<Ex, A>> Recover<Ex>()
           where Ex : Exception
         {   var self = this;
             return
-                new IO<E, A>
+                new IO<E, Or<Ex, A>>
                   ( async () =>
                     {   try
-                        {   return await self.task();
+                        {   return Or.Right<Ex, A>(await self.task());
                         }
                         catch (Ex e)
-                        {   return await handler(e).task();
+                        {   return Or.Left<Ex, A>(e);
                         }
                     }
                   );
         }
+
+        public IO<E, A> Catch<Ex>(Func<Ex, IO<E, A>> handler)
+          where Ex : Exception
+        =>  Recover<Ex>().FlatMap(x => x.Cata(handler, IO<E>.Pure<A>));
 
         public IO<E0, A> Interleave<E0>()
           where E0 : E

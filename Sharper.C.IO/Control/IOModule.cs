@@ -35,5 +35,35 @@ namespace Sharper.C.Control
           , Func<A, IO<E, B>> f
           )
         =>  ma.Map(f).Sequence();
+
+        public static IO<E, Maybe<B>> MapT<E, A, B>
+          ( this IO<E, Maybe<A>> ioma
+          , Func<A, B> f
+          )
+        =>  ioma.Map(ma => ma.Map(f));
+
+        public static IO<E, Maybe<B>> FlatMapT<E, A, B>
+          ( this IO<E, Maybe<A>> ioma
+          , Func<A, IO<E, Maybe<B>>> f
+          )
+        =>  ioma.FlatMap(ma => ma.Traverse(f).Map(mma => mma.Join()));
+
+        public static IO<E, Or<X, B>> MapT<E, X, A, B>
+          ( this IO<E, Or<X, A>> ioma
+          , Func<A, B> f
+          )
+        =>  ioma.Map(ma => ma.Map(f));
+
+        public static IO<E, Or<X, B>> FlatMapT<E, X, A, B>
+          ( this IO<E, Or<X, A>> ioma
+          , Func<A, IO<E, Or<X, B>>> f
+          )
+        =>  ioma.FlatMap(ma => ma.Traverse(f).Map(mma => mma.Join()));
+
+        private static Maybe<A> Join<A>(this Maybe<Maybe<A>> m)
+        =>  m.ValueOr(Maybe.Nothing<A>);
+
+        private static Or<X ,A> Join<X, A>(this Or<X ,Or<X ,A>> m)
+        =>  m.RightValueOr(Or.Left<X, A>);
     }
 }
