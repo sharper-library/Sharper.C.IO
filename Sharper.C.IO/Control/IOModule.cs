@@ -6,11 +6,17 @@ namespace Sharper.C.Control
 {
     public static class IOModule
     {
+        public static IO<E, A> Handle<E, Ex, A>
+          ( this IO<E, Or<Ex, A>> io
+          , Func<Ex, IO<E, A>> handler
+          )
+        =>  io.FlatMap(or => or.Cata(handler, IO<E>.Pure));
+
         public static IO<E, Unit> WhenJust<E, A>
           ( this Maybe<A> m
           , Func<A, IO<E, Unit>> action
           )
-        => m.Map(action).ValueOr(IO<E>.Pure(UNIT));
+        =>  m.Map(action).ValueOr(IO<E>.Pure(UNIT));
 
         public static IO<E, Or<A, B>> Sequence<E, A, B>(this Or<A, IO<E, B>> or)
         =>  or.Cata
@@ -29,7 +35,7 @@ namespace Sharper.C.Control
         =>  or.Swap.Sequence().Map(x => x.Swap);
 
         public static IO<E, Or<C, B>> TraverseLeft<E, A, B, C>
-          ( Or<A, B> or
+          ( this Or<A, B> or
           , Func<A, IO<E, C>> f
           )
         =>  or.MapLeft(f).SequenceLeft();
