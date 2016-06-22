@@ -24,6 +24,16 @@ namespace Sharper.C.Control
           )
         =>  or.Map(f).Sequence();
 
+        public static IO<E, Or<A, B>>
+        SequenceLeft<E, A, B>(this Or<IO<E, A>, B> or)
+        =>  or.Swap.Sequence().Map(x => x.Swap);
+
+        public static IO<E, Or<C, B>> TraverseLeft<E, A, B, C>
+          ( Or<A, B> or
+          , Func<A, IO<E, C>> f
+          )
+        =>  or.MapLeft(f).SequenceLeft();
+
         public static IO<E, Maybe<A>> Sequence<E, A>(this Maybe<IO<E, A>> ma)
         =>  ma.Cata
               ( () => IO<E>.Pure(Maybe.Nothing<A>())
@@ -59,6 +69,30 @@ namespace Sharper.C.Control
           , Func<A, IO<E, Or<X, B>>> f
           )
         =>  ioma.FlatMap(ma => ma.Traverse(f).Map(mma => mma.Join()));
+
+        public static IO<E, Or<Y, A>> MapLeftT<E, X, Y, A>
+          ( this IO<E, Or<X, A>> iomx
+          , Func<X, Y> f
+          )
+        =>  iomx.Map(or => or.Swap).MapT(f).Map(or => or.Swap);
+
+        public static IO<E, Or<Y, A>> FlatMapLeftT<E, X, Y, A>
+          ( this IO<E, Or<X, A>> iomx
+          , Func<X, IO<E, Or<Y, A>>> f
+          )
+        =>  iomx.MapLeftT(f).JoinLeftT();
+
+        public static IO<E, Maybe<A>>
+        JoinT<E, A>(this IO<E, Maybe<IO<E, Maybe<A>>>> io)
+        =>  io.FlatMapT(x => x);
+
+        public static IO<E, Or<X, A>>
+        JoinT<E, X, A>(this IO<E, Or<X, IO<E, Or<X, A>>>> io)
+        =>  io.FlatMapT(x => x);
+
+        public static IO<E, Or<X, A>>
+        JoinLeftT<E, X, A>(this IO<E, Or<IO<E, Or<X, A>>, A>> io)
+        =>  io.FlatMapLeftT(x => x);
 
         private static Maybe<A> Join<A>(this Maybe<Maybe<A>> m)
         =>  m.ValueOr(Maybe.Nothing<A>);
