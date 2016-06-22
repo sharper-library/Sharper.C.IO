@@ -1,0 +1,3 @@
+*.json filter=json
+
+* text=auto
