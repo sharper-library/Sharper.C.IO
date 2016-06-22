@@ -109,7 +109,7 @@
                     "lib/netstandard1.3/Sharper.C.Eq.dll": {}
                 }
             },
-            "Sharper.C.Maybe/1.3.0": {
+            "Sharper.C.Maybe/1.4.0": {
                 "type": "package",
                 "dependencies": {
                     "NETStandard.Library": "1.5.0-rc2-24027",
@@ -944,12 +944,12 @@
                 "lib/netstandard1.3/Sharper.C.Eq.dll"
             ]
         },
-        "Sharper.C.Maybe/1.3.0": {
-            "sha512": "tmoSjHLKEH8sPZhfY4ue+UpNn7iGr09LH5T34DCfmmgLEdkiQ1i50DYE6UNYGKVvPpRQIvTPlqm1Mrgaln3+vA==",
+        "Sharper.C.Maybe/1.4.0": {
+            "sha512": "e2aked1zdy9Eq64dcUsn4kDzhRTxSp/1ZzE/u/R+5dkHib4hTr7CukRtL9FA8N1/9Lkr+unV2kJDCl4D49za9w==",
             "type": "package",
-            "path": "Sharper.C.Maybe/1.3.0",
+            "path": "Sharper.C.Maybe/1.4.0",
             "files": [
-                "Sharper.C.Maybe.1.3.0.nupkg.sha512",
+                "Sharper.C.Maybe.1.4.0.nupkg.sha512",
                 "Sharper.C.Maybe.nuspec",
                 "lib/netstandard1.3/Sharper.C.Maybe.dll"
             ]

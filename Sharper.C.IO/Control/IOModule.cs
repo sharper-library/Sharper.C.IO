@@ -18,10 +18,22 @@ namespace Sharper.C.Control
               , b => b.Map(Or.Right<A, B>)
               );
 
+        public static IO<E, Or<A, C>> Traverse<E, A, B, C>
+          ( this Or<A, B> or
+          , Func<B, IO<E, C>> f
+          )
+        =>  or.Map(f).Sequence();
+
         public static IO<E, Maybe<A>> Sequence<E, A>(this Maybe<IO<E, A>> ma)
         =>  ma.Cata
               ( () => IO<E>.Pure(Maybe.Nothing<A>())
               , a => a.Map(Maybe.Just)
               );
+
+        public static IO<E, Maybe<B>> Traverse<E, A, B>
+          ( this Maybe<A> ma
+          , Func<A, IO<E, B>> f
+          )
+        =>  ma.Map(f).Sequence();
     }
 }
