@@ -95,6 +95,9 @@ namespace Sharper.C.Control
           where E0 : E
         =>  new IO<E0, A>(task);
 
+        public IO<E0, A> UnsafeForceInterleave<E0>()
+        =>  new IO<E0, A>(task);
+
         public IO<E0, A> As<E0>()
           where E0 : E
         =>  Interleave<E0>();
