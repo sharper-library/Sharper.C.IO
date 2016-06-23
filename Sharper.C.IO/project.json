@@ -10,13 +10,13 @@
     },
     "dependencies": {
         "Sharper.C.Unit": "1.*",
-        "Sharper.C.Maybe": "1.*",
-        "Sharper.C.Sum": "1.*"
+        "Sharper.C.Maybe": "2.1-*",
+        "Sharper.C.Sum": "1.1-*"
     },
     "frameworks": {
         "netstandard1.3": {
             "dependencies": {
-                "NETStandard.Library": "1.5.0-rc2-*"
+                "NETStandard.Library": "1.5.0-*"
             }
         }
     }
