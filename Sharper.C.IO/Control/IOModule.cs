@@ -100,6 +100,12 @@ namespace Sharper.C.Control
         JoinLeftT<E, X, A>(this IO<E, Or<IO<E, Or<X, A>>, A>> io)
         =>  io.FlatMapLeftT(x => x);
 
+        public static IO<E, A> OrT<E, A>
+          ( this IO<E, Maybe<A>> io
+          , IO<E, A> a
+          )
+        =>  io.FlatMap(ma => ma.Cata(() => a, IO<E>.Pure));
+
         private static Maybe<A> Join<A>(this Maybe<Maybe<A>> m)
         =>  m.ValueOr(Maybe.Nothing<A>);
 
