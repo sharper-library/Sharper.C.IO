@@ -122,7 +122,7 @@
                     "lib/netstandard1.3/Sharper.C.Maybe.dll": {}
                 }
             },
-            "Sharper.C.Sum/1.1.0-master-00012": {
+            "Sharper.C.Sum/1.1.0-master-00013": {
                 "type": "package",
                 "dependencies": {
                     "NETStandard.Library": "1.5.0-rc2-24027",
@@ -954,12 +954,12 @@
                 "lib/netstandard1.3/Sharper.C.Maybe.dll"
             ]
         },
-        "Sharper.C.Sum/1.1.0-master-00012": {
-            "sha512": "jS5+TTF/faLA46PU6FuZtSL93fBh6feWVnDgpVLxO9qSm7ukMRpP0fktTAkBUzWhzpQrYG0uqE/IKM37/nhfYQ==",
+        "Sharper.C.Sum/1.1.0-master-00013": {
+            "sha512": "04zGExG5z15oVleNoOio3Tqg1qIYiLpUhG5Ysk8EFB3Grh7wAq9tbMRowa6e2Buhmy86JOF6pSYFyntQDoo92Q==",
             "type": "package",
-            "path": "Sharper.C.Sum/1.1.0-master-00012",
+            "path": "Sharper.C.Sum/1.1.0-master-00013",
             "files": [
-                "Sharper.C.Sum.1.1.0-master-00012.nupkg.sha512",
+                "Sharper.C.Sum.1.1.0-master-00013.nupkg.sha512",
                 "Sharper.C.Sum.nuspec",
                 "lib/netstandard1.3/Sharper.C.Sum.dll"
             ]

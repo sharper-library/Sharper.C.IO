@@ -86,7 +86,7 @@ namespace Sharper.C.Control
           ( this IO<E, Or<X, A>> iomx
           , Func<X, IO<E, Or<Y, A>>> f
           )
-        =>  iomx.MapLeftT(f).JoinLeftT();
+        =>  iomx.FlatMap(or => or.TraverseLeft(f).Map(x => x.JoinLeft()));
 
         public static IO<E, Maybe<A>>
         JoinT<E, A>(this IO<E, Maybe<IO<E, Maybe<A>>>> io)
