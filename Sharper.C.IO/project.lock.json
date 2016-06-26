@@ -122,6 +122,18 @@
                     "lib/netstandard1.3/Sharper.C.Maybe.dll": {}
                 }
             },
+            "Sharper.C.Phantom/1.0.0-z": {
+                "type": "package",
+                "dependencies": {
+                    "NETStandard.Library": "1.5.0-rc2-24027"
+                },
+                "compile": {
+                    "lib/netstandard1.3/Sharper.C.Phantom.dll": {}
+                },
+                "runtime": {
+                    "lib/netstandard1.3/Sharper.C.Phantom.dll": {}
+                }
+            },
             "Sharper.C.Sum/1.1.0-master-00013": {
                 "type": "package",
                 "dependencies": {
@@ -265,6 +277,31 @@
                 },
                 "compile": {
                     "ref/netstandard1.0/System.Diagnostics.Tools.dll": {}
+                }
+            },
+            "System.Diagnostics.TraceSource/4.0.0-rc2-24027": {
+                "type": "package",
+                "dependencies": {
+                    "System.Collections": "4.0.11-rc2-24027",
+                    "System.Diagnostics.Debug": "4.0.11-rc2-24027",
+                    "System.Globalization": "4.0.11-rc2-24027",
+                    "System.Resources.ResourceManager": "4.0.1-rc2-24027",
+                    "System.Runtime": "4.1.0-rc2-24027",
+                    "System.Runtime.Extensions": "4.1.0-rc2-24027",
+                    "System.Threading": "4.0.11-rc2-24027"
+                },
+                "compile": {
+                    "ref/netstandard1.3/System.Diagnostics.TraceSource.dll": {}
+                },
+                "runtimeTargets": {
+                    "runtimes/unix/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {
+                        "assetType": "runtime",
+                        "rid": "unix"
+                    },
+                    "runtimes/win7/lib/netstandard1.3/System.Diagnostics.TraceSource.dll": {
+                        "assetType": "runtime",
+                        "rid": "win7"
+                    }
                 }
             },
             "System.Diagnostics.Tracing/4.1.0-rc2-24027": {
@@ -954,6 +991,16 @@
                 "lib/netstandard1.3/Sharper.C.Maybe.dll"
             ]
         },
+        "Sharper.C.Phantom/1.0.0-z": {
+            "sha512": "MsX7TgBuxyjKYco3VvtuMYMhPFVXJbxE6820Hed7QMIeoRd+ojalLYgfIr4T4V4gP1ORUiM9OsLIAZQb1DddUw==",
+            "type": "package",
+            "path": "Sharper.C.Phantom/1.0.0-z",
+            "files": [
+                "Sharper.C.Phantom.1.0.0-z.nupkg.sha512",
+                "Sharper.C.Phantom.nuspec",
+                "lib/netstandard1.3/Sharper.C.Phantom.dll"
+            ]
+        },
         "Sharper.C.Sum/1.1.0-master-00013": {
             "sha512": "04zGExG5z15oVleNoOio3Tqg1qIYiLpUhG5Ysk8EFB3Grh7wAq9tbMRowa6e2Buhmy86JOF6pSYFyntQDoo92Q==",
             "type": "package",
@@ -1356,6 +1403,45 @@
                 "ref/xamarinmac20/_._",
                 "ref/xamarintvos10/_._",
                 "ref/xamarinwatchos10/_._"
+            ]
+        },
+        "System.Diagnostics.TraceSource/4.0.0-rc2-24027": {
+            "sha512": "qv6TcsC9l4V79sDIiMJzRmQbIXywMHWpHAnkoVhR+lDxeQp9+rutN+rVL/8vvRD5/a4FiX9SV971K4FaKHBv3w==",
+            "type": "package",
+            "path": "System.Diagnostics.TraceSource/4.0.0-rc2-24027",
+            "files": [
+                "System.Diagnostics.TraceSource.4.0.0-rc2-24027.nupkg.sha512",
+                "System.Diagnostics.TraceSource.nuspec",
+                "ThirdPartyNotices.txt",
+                "dotnet_library_license.txt",
+                "lib/MonoAndroid10/_._",
+                "lib/MonoTouch10/_._",
+                "lib/net46/System.Diagnostics.TraceSource.dll",
+                "lib/xamarinios10/_._",
+                "lib/xamarinmac20/_._",
+                "lib/xamarintvos10/_._",
+                "lib/xamarinwatchos10/_._",
+                "ref/MonoAndroid10/_._",
+                "ref/MonoTouch10/_._",
+                "ref/net46/System.Diagnostics.TraceSource.dll",
+                "ref/netstandard1.3/System.Diagnostics.TraceSource.dll",
+                "ref/netstandard1.3/System.Diagnostics.TraceSource.xml",
+                "ref/netstandard1.3/de/System.Diagnostics.TraceSource.xml",
+                "ref/netstandard1.3/es/System.Diagnostics.TraceSource.xml",
+                "ref/netstandard1.3/fr/System.Diagnostics.TraceSource.xml",
+                "ref/netstandard1.3/it/System.Diagnostics.TraceSource.xml",
+                "ref/netstandard1.3/ja/System.Diagnostics.TraceSource.xml",
+                "ref/netstandard1.3/ko/System.Diagnostics.TraceSource.xml",
+                "ref/netstandard1.3/ru/System.Diagnostics.TraceSource.xml",
+                "ref/netstandard1.3/zh-hans/System.Diagnostics.TraceSource.xml",
+                "ref/netstandard1.3/zh-hant/System.Diagnostics.TraceSource.xml",
+                "ref/xamarinios10/_._",
+                "ref/xamarinmac20/_._",
+                "ref/xamarintvos10/_._",
+                "ref/xamarinwatchos10/_._",
+                "runtimes/unix/lib/netstandard1.3/System.Diagnostics.TraceSource.dll",
+                "runtimes/win7/lib/netcore50/_._",
+                "runtimes/win7/lib/netstandard1.3/System.Diagnostics.TraceSource.dll"
             ]
         },
         "System.Diagnostics.Tracing/4.1.0-rc2-24027": {
@@ -3422,8 +3508,10 @@
     "projectFileDependencyGroups": {
         "": [
             "Sharper.C.Maybe >= 2.1.0-*",
+            "Sharper.C.Phantom >= 1.0.0-z",
             "Sharper.C.Sum >= 1.1.0-*",
-            "Sharper.C.Unit >= 1.*"
+            "Sharper.C.Unit >= 1.*",
+            "System.Diagnostics.TraceSource >= 4.0.0-rc2-24027"
         ],
         ".NETStandard,Version=v1.3": [
             "NETStandard.Library >= 1.5.0-*"

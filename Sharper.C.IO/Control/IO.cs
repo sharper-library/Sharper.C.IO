@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Sharper.C.Data;
@@ -27,6 +28,17 @@ namespace Sharper.C.Control
                     return UNIT;
                 }
               );
+
+        public static IO<E, A> Mk<A>(Func<IOAwaitToken, Task<A>> a)
+        =>  new IO<E, A>(() => a(IOAwaitToken.Instance));
+
+        public static IO<E, Unit> Mk(Func<IOAwaitToken, Task> a)
+        =>  new IO<E, Unit>
+              ( async () =>
+                {   await a((IOAwaitToken.Instance));
+                    return UNIT;
+                }
+              );
     }
 
     public struct IO<E, A>
@@ -46,7 +58,7 @@ namespace Sharper.C.Control
         {   var self = this;
             return
                 new IO<E, B>
-                  ( async () => await f(await self.Awaitable).task()
+                  ( async () => await f(await self.Awaitable()).task()
                   );
         }
 
@@ -61,14 +73,14 @@ namespace Sharper.C.Control
             return
                 new IO<E, C>
                   ( async () =>
-                    {   var a = await self.Awaitable;
-                        var b = await f(a).Awaitable;
+                    {   var a = await self.Awaitable();
+                        var b = await f(a).Awaitable();
                         return g(a, b);
                     }
                   );
         }
 
-        public Task<A> UnsafeTask
+        public Task<A> UnsafeUntrackedTask
         =>  task();
 
         public IO<E, Or<Ex, A>> Recover<Ex>()
@@ -91,21 +103,19 @@ namespace Sharper.C.Control
           where Ex : Exception
         =>  Recover<Ex>().FlatMap(x => x.Cata(handler, IO<E>.Pure<A>));
 
-        public IO<E0, A> Interleave<E0>()
-          where E0 : E
-        =>  new IO<E0, A>(task);
+        public IO<F, A> Interleave<F>()
+          where F : E
+        =>  UnsafeForceInterleave<F>();
 
-        public IO<E0, A> UnsafeForceInterleave<E0>()
-        =>  new IO<E0, A>(task);
+        public IO<F, A> UnsafeForceInterleave<F>()
+        =>  new IO<F, A>(task);
 
-        public IO<E0, A> As<E0>()
-          where E0 : E
-        =>  Interleave<E0>();
+        public ConfiguredTaskAwaitable<A> Awaitable(IOAwaitToken token)
+        {   Trace.Assert(token != null);
+            return Awaitable();
+        }
 
-        private ConfiguredTaskAwaitable<A> Awaitable
+        private ConfiguredTaskAwaitable<A> Awaitable()
         =>  task().ConfigureAwait(false);
-
-        public static ConfiguredTaskAwaitable<A> operator ~(IO<E, A> io)
-        =>  io.Awaitable;
     }
 }
