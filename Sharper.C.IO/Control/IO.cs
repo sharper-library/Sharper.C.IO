@@ -39,6 +39,14 @@ namespace Sharper.C.Control
                     return UNIT;
                 }
               );
+
+        public static IO<E, A> Join<E, A>(this IO<E, IO<E, A>> x)
+        =>  IO<E>.Mk
+              ( async tok =>
+                {   var ioa = await x.Awaitable(tok);
+                    return await ioa.Awaitable(tok);
+                }
+              );
     }
 
     public struct IO<E, A>
